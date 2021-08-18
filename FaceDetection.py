@@ -1,13 +1,13 @@
 import cv2
 
-face_cascad = cv2.CascadeClassifier("C:\\Users\\Menoo\\PycharmProjects\\FaceDetection\\haarcascade_frontalface_alt2.xml")
+face_cascad = cv2.CascadeClassifier("C:\\Users\\Menoo\\PycharmProjects\\FaceDetection\\haarcascade_frontalface_alt2.xml") #Pre-trained model to detect objects
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) 
 cap.open(0, cv2.CAP_DSHOW)
 while(True):
-    ret, frame = cap.read()
+    ret, frame = cap.read() #Get single frame
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    face = face_cascad.detectMultiScale(gray, scaleFactor= 1.5, minNeighbors= 5)
+    face = face_cascad.detectMultiScale(gray, scaleFactor= 1.5, minNeighbors= 5) #Detect faces in the frame 
     for(x, y, w, h) in face:
         print(x, y, w, h)
         roi_gray = gray[y:y + h, x:x + w]
@@ -15,6 +15,7 @@ while(True):
         #img = "image.png"
         #cv2.imwrite(img, roi_gray)
 
+        #Rectangle features
         color = (255, 0, 255)
         stroke = 3
         width = x + w
@@ -24,4 +25,4 @@ while(True):
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break
 cap.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows() #Destroy windows
